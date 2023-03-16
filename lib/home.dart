@@ -1,5 +1,5 @@
 import 'dart:io';
-//testing git hello
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:file_picker/file_picker.dart';
@@ -44,20 +44,23 @@ class _HomeState extends State<Home> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            const SizedBox(height: 50),
+            Center(
+              child: ElevatedButton(
 
-            ElevatedButton(
 
-              onPressed: () async {
-                final result = await FileSelector.selectFile();
-                if (result != null) {
-                  setState(()  {
-                    _filePath = result;
-                    print(_filePath);
-                  });
-                  await _transcribeAudioFile(_filePath);
-                }
-              },
-              child: const Text('Select File'),
+                onPressed: () async {
+                  final result = await FileSelector.selectFile();
+                  if (result != null) {
+                    setState(()  {
+                      _filePath = result;
+                      print(_filePath);
+                    });
+                    await _transcribeAudioFile(_filePath);
+                  }
+                },
+                child: const Text('Select File'),
+              ),
             ),
             const SizedBox(height: 5.0),
             Expanded(
