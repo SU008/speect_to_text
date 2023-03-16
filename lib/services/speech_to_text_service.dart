@@ -18,11 +18,11 @@ class ChatGPTService {
   Future <String> transcribe(File audioFile) async {
     try {
       final endpoint = Uri.parse('https://api.openai.com/v1/audio/transcriptions');
-      const tokenAPI = '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';
+      const tokenAPI = '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';
       const model = 'whisper-1';
 
       final request = http.MultipartRequest('POST', endpoint)
-        ..headers['Authorization'] = 'Bearer: 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 '
+        ..headers['Authorization'] = 'Bearer $tokenAPI'
         ..headers['Content-Type'] = 'application/json'
         //..headers['Content-Type'] = 'multipart/form-data'
         ..fields['model'] = model
