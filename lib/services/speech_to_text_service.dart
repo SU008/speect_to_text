@@ -18,7 +18,8 @@ class ChatGPTService {
   Future <String> transcribe(File audioFile) async {
     try {
       final endpoint = Uri.parse('https://api.openai.com/v1/audio/transcriptions');
-      const tokenAPI = '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';
+
+      var tokenAPI = dotenv.env['API_KEY']!;
       const model = 'whisper-1';
 
       final request = http.MultipartRequest('POST', endpoint)
@@ -36,7 +37,10 @@ class ChatGPTService {
         final jsonResponse = json.decode(responseString);
 
         return jsonResponse['text'];
-      } else {
+      } if(response.statusCode == 401){
+        return 'Error: API Key Invalid, try again or use a new key';
+      }
+      else {
         return 'Error: ${response.statusCode}';
       }
     } catch (e) {
